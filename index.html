@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DP Rénov' - L'Artisan de Confiance</title>
+  <title>DP Rénov' - L'Artisan de Confiance | Plomberie, Électricité, Rénovation en Bretagne</title>
+  <meta name="description" content="DP Rénov', artisan plombier-électricien en Bretagne. Recherche de fuites, mise aux normes électriques, rénovation complète. Intervention à Brest, Saint-Brieuc, Carhaix-Plouguer, Quimper, Lorient.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,21 +12,32 @@
   <!-- Navigation -->
   <header class="navbar">
     <div class="logo">DP RÉNOV'</div>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-burger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </label>
+
     <nav class="nav-links">
       <a href="#services">Services</a>
       <a href="#secteur">Secteur</a>
       <a href="#contact">Contact</a>
+      <a href="tel:0607326597" class="btn-phone btn-phone--mobile">06.07.32.65.97</a>
     </nav>
-    <a href="tel:0607326597" class="btn-phone">06.07.32.65.97</a>
+
+    <a href="tel:0607326597" class="btn-phone btn-phone--desktop">06.07.32.65.97</a>
   </header>
 
-  <!-- Section Visuelle Principale -->
-  <section class="hero-section" id="secteur">
-    <!-- Zone d'interaction invisible calquée sur le bouton de l'image -->
-    <a href="#services" class="invisible-btn" aria-label="Découvrir nos chantiers"></a>
+  <!-- Hero -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>DP Rénov' <span>— L'Artisan de Confiance</span></h1>
+      <p>Solutions Rénovation et Dépannage : Plomberie, Électricité, et Plus.</p>
+      <a href="#services" class="btn-cta">Découvrir nos chantiers</a>
+    </div>
   </section>
 
-  <!-- Section Services -->
+  <!-- Services -->
   <section class="services-section" id="services">
     <h2>Nos Domaines d'Expertise</h2>
     <div class="services-grid">
@@ -46,6 +58,49 @@
       </div>
     </div>
   </section>
+
+  <!-- Secteur d'intervention -->
+  <section class="secteur-section" id="secteur">
+    <h2>Secteur d'Intervention</h2>
+    <p class="secteur-intro">DP Rénov' intervient dans tout le centre et l'ouest de la Bretagne :</p>
+    <ul class="secteur-list">
+      <li>Brest</li>
+      <li>Saint-Brieuc</li>
+      <li>Carhaix-Plouguer</li>
+      <li>Quimper</li>
+      <li>Lorient</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <h2>Contact</h2>
+    <p>Un projet, une urgence ? Contactez-nous directement.</p>
+    <div class="contact-links">
+      <a href="tel:0607326597" class="btn-cta">📞 06.07.32.65.97</a>
+      <a href="mailto:[EMAIL A COMPLETER]" class="btn-cta btn-cta--ghost">✉️ [EMAIL A COMPLETER]</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div>
+        <strong>DP RÉNOV'</strong>
+        <p>Artisan plombier-électricien — Bretagne</p>
+      </div>
+      <div class="footer-legal">
+        <p>[RAISON SOCIALE / NOM ARTISAN A COMPLETER]</p>
+        <p>[ADRESSE A COMPLETER]</p>
+        <p>SIRET : [A COMPLETER]</p>
+      </div>
+    </div>
+    <p class="footer-copy">© <span id="year"></span> DP Rénov'. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
