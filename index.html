@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DP Rénov' - Électricité & Plomberie en Centre-Bretagne</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -28,202 +34,184 @@
         .bg-card-elegant { background-color: #1A2026; }
         .border-gold { border-color: #C5A880; }
         .text-gold { color: #C5A880; }
-        .btn-gold { background-color: #BA9663; }
-        .btn-gold:hover { background-color: #A37F51; }
+        .btn-gold { background-color: #B29663; }
+        .btn-gold:hover { background-color: #A38751; }
+        
+        /* Personnalisation des étiquettes Leaflet */
+        .leaflet-tooltip {
+            background-color: #1A2026 !important;
+            color: #ffffff !important;
+            border: 1px solid #C5A880 !important;
+            border-radius: 6px !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            padding: 3px 8px !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+        }
+        .leaflet-tooltip-top:before {
+            border-top-color: #C5A880 !important;
+        }
     </style>
 </head>
 <body class="bg-dark-elegant text-gray-100 font-sans antialiased">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="w-full border-b border-gray-800 bg-dark-elegant/90 backdrop-blur sticky top-0 z-50">
+    <header class="border-b border-gray-800 sticky top-0 bg-dark-elegant/90 backdrop-blur-md z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Logo -->
             <div class="flex items-center space-x-3">
-                <span class="font-serif text-2xl lg:text-3xl tracking-wide text-white">
-                    <span class="text-gold font-bold">DP</span> Rénov'
-                </span>
+                <span class="font-serif text-2xl font-bold tracking-wider text-white">DP <span class="text-gold">RÉNOV'</span></span>
             </div>
-            
-            <!-- Contact Rapide Header -->
-            <div class="hidden md:flex items-center space-x-6 text-sm">
-                <div class="text-right">
-                    <p class="text-xs text-gray-400">Appelez le</p>
-                    <a href="tel:0607326597" class="text-gold font-bold text-base hover:underline">06.07.32.65.97</a>
-                </div>
-                <div class="text-right border-l border-gray-700 pl-6">
-                    <p class="text-xs text-gray-400">Email</p>
-                    <a href="mailto:dp.renov29@gmail.com" class="text-gray-200 hover:text-gold transition">dp.renov29@gmail.com</a>
-                </div>
-            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#services" class="hover:text-gold transition">Services</a>
+                <a href="#carte" class="hover:text-gold transition">Secteur</a>
+                <a href="#contact" class="hover:text-gold transition">Contact</a>
+            </nav>
+            <a href="tel:0607326597" class="btn-gold text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-lg">
+                06.07.32.65.97
+            </a>
         </div>
     </header>
 
-    <!-- MAIN HERO SECTION -->
+    <!-- HERO SECTION -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <!-- Texte principal (Gauche) -->
             <div class="lg:col-span-7 space-y-6">
                 <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
-                    DP Rénov' - L'Artisan de Confiance <br class="hidden sm:inline">
+                    DP Rénov' – L'Artisan de Confiance <br class="hidden sm:inline">
                     du <span class="text-gold">Centre-Finistère (29)</span>, du <span class="text-gold">Centre-Morbihan (56)</span> et des <span class="text-gold">Côtes-d'Armor (22)</span>
                 </h1>
                 <p class="text-gray-400 text-base sm:text-lg max-w-2xl font-light">
-                    Solutions Rénovation et Dépannage : Plomberie, Électricité, et Plus. <br>
-                    Interventions rapides sur les secteurs de Carhaix-Plouguer, Rostrenen, Callac, Gourin et Le Faouët (29, 22, 56).
+                    Solutions Rénovation et Dépannage : Plomberie, Électricité, et Plus.
                 </p>
                 <div class="pt-4">
-                    <a href="#contact" class="btn-gold text-white font-medium px-8 py-4 rounded shadow-lg transition duration-300 inline-block text-sm uppercase tracking-wider">
-                        Découvrir nos chantiers | >
+                    <a href="#contact" class="btn-gold text-white font-medium px-8 py-4 rounded-lg transition duration-300 inline-block text-sm uppercase tracking-wider">
+                        Découvrir nos chantiers
                     </a>
                 </div>
             </div>
 
-            <!-- Carte Visuelle (Droite) -->
-            <div class="lg:col-span-5 flex justify-center">
-                <div class="relative p-2 bg-card-elegant rounded-2xl border border-gray-800 shadow-2xl max-w-md w-full">
-                    <!-- Remplacement par ton image fixe de la carte -->
-<!-- Intégration directe de la maquette -->
-<img src="Gemini_Generated_Image_64oohw64oohw64oo.png" alt="Zone d'intervention DP Rénov" class="rounded-xl w-full h-auto object-cover border border-gold/20 shadow-lg">                    <div class="absolute bottom-6 left-6 bg-dark-elegant/90 border border-gold/30 px-4 py-2 rounded text-xs font-bold tracking-widest uppercase text-gold">
-                        Zone Gourin / Carhaix
-                    </div>
+            <!-- Carte Carte Interactive Exacte (Droite) -->
+            <div id="carte" class="lg:col-span-5 flex justify-center">
+                <div class="relative p-2 bg-card-elegant rounded-2xl border border-gray-800 shadow-2xl max-w-md w-full h-[400px]">
+                    <div id="map" class="w-full h-full rounded-xl z-10"></div>
                 </div>
             </div>
 
         </div>
     </main>
-<!-- SERVICES SECTION -->
+
+    <!-- SERVICES SECTION -->
     <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-gray-900">
-        <h2 class="font-serif text-3xl text-white mb-12">Services</h2>
-        
+        <h2 class="font-serif text-3xl text-white mb-12 text-center">Nos Domaines d'Expertise</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- Carte 1 : Plomberie -->
-            <div class="bg-card-elegant p-8 rounded-xl border border-gray-800 hover:border-gold/30 transition duration-300 flex flex-col items-center text-center">
-                <div class="text-gold mb-6">
-                    <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+            <!-- Service 1 -->
+            <div class="bg-card-elegant p-8 rounded-xl border border-gray-800 hover:border-gold/50 transition">
+                <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
-                <h3 class="font-serif text-xl text-white uppercase tracking-wider mb-4">Plomberie</h3>
-                <ul class="text-gray-400 space-y-2 text-sm font-light">
-                    <li>• Salles de bain</li>
-                    <li>• Recherche de fuites</li>
-                    <li>• Robinetterie & Dépannage</li>
-                </ul>
-            </div>
-
-            <!-- Carte 2 : Électricité -->
-            <div class="bg-card-elegant p-8 rounded-xl border border-gold/40 shadow-xl flex flex-col items-center text-center relative overflow-hidden">
-                <div class="absolute top-0 inset-x-0 h-1 bg-gold"></div>
-                <div class="text-gold mb-6">
-                    <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h0a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                </div>
-                <h3 class="font-serif text-xl text-white uppercase tracking-wider mb-4">Électricité</h3>
-                <ul class="text-gray-400 space-y-2 text-sm font-light">
-                    <li>• Mise aux normes & Rénovation</li>
-                    <li>• Tableaux Électriques</li>
-                    <li>• Dépannage Panne 24/7</li>
-                </ul>
-            </div>
-
-            <!-- Carte 3 : Rénovation Complète -->
-            <div class="bg-card-elegant p-8 rounded-xl border border-gray-800 hover:border-gold/30 transition duration-300 flex flex-col items-center text-center">
-                <div class="text-gold mb-6">
-                    <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                </div>
-                <h3 class="font-serif text-xl text-white uppercase tracking-wider mb-4">Rénovation Complète</h3>
-                <ul class="text-gray-400 space-y-2 text-sm font-light">
-                    <li>• Aménagement Intérieur</li>
-                    <li>• Isolation thermique</li>
-                    <li>• Éclairage & Finitions</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CONTACT & FORMULAIRE SECTION (Correction Grid et alignement) -->
-    <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-gray-900">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <!-- Infos de contact (Gauche) -->
-            <div class="lg:col-span-5 space-y-6">
-                <h2 class="font-serif text-3xl text-white">Contact & Devis</h2>
-                <p class="text-gray-400 font-light text-sm leading-relaxed">
-                    Une urgence de dépannage ou un projet de rénovation complète ? <br>
-                    Remplissez le formulaire ci-contre. DP Rénov' vous recontacte sous 24h à 48h pour étudier votre demande ou convenir d'un rendez-vous sur place.
+                <h3 class="font-serif text-xl text-white mb-3">Électricité</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">
+                    Mise aux normes, installation de tableaux électriques, dépannage rapide et éclairage intérieur/extérieur.
                 </p>
-                
-                <div class="space-y-4 pt-4">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-gold text-xl">📞</span>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wider">Téléphone direct</p>
-                            <a href="tel:0607326597" class="text-white font-medium hover:text-gold transition">06.07.32.65.97</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-gold text-xl">✉️</span>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wider">Adresse Email</p>
-                            <a href="mailto:dp.renov29@gmail.com" class="text-white font-medium hover:text-gold transition">dp.renov29@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-gold text-xl">🛡️</span>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wider">Tranquillité d'esprit</p>
-                            <p class="text-white font-medium">Garantie Décennale souscrite</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Formulaire (Droite) -->
-            <div class="lg:col-span-7 bg-card-elegant p-6 sm:p-8 rounded-xl border border-gray-800 w-full">
-                <!-- Entre ton ID Formspree à la place de TON_ID_FORMSPREE quand tu l'auras créé -->
-                <form action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST" class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label for="name" class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Votre Nom</label>
-                            <input type="text" name="name" id="name" required class="w-full bg-dark-elegant/50 border border-gray-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition">
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Téléphone</label>
-                            <input type="tel" name="phone" id="phone" required class="w-full bg-dark-elegant/50 border border-gray-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Adresse Email</label>
-                        <input type="email" name="email" id="email" required class="w-full bg-dark-elegant/50 border border-gray-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition">
-                    </div>
+            <!-- Service 2 -->
+            <div class="bg-card-elegant p-8 rounded-xl border border-gray-800 hover:border-gold/50 transition">
+                <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                </div>
+                <h3 class="font-serif text-xl text-white mb-3">Plomberie</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">
+                    Recherche de fuites, création et rénovation de salles de bain, pose de sanitaires et tuyauterie.
+                </p>
+            </div>
 
-                    <div>
-                        <label for="message" class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Description de votre projet ou panne</label>
-                        <textarea name="message" id="message" rows="4" required class="w-full bg-dark-elegant/50 border border-gray-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition resize-none" placeholder="Ex: Recherche de fuite, remplacement de tableau électrique..."></textarea>
-                    </div>
-
-                    <div>
-                        <button type="submit" class="w-full btn-gold text-white font-medium py-4 rounded text-sm uppercase tracking-wider transition duration-300">
-                            Envoyer ma demande de devis
-                        </button>
-                    </div>
-                </form>
+            <!-- Service 3 -->
+            <div class="bg-card-elegant p-8 rounded-xl border border-gray-800 hover:border-gold/50 transition">
+                <div class="w-12 h-12 bg-gold/10 text-gold rounded-lg flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                </div>
+                <h3 class="font-serif text-xl text-white mb-3">Rénovation Complète</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">
+                    Aménagement intérieur, petites rénovations et accompagnement de vos projets dans tout le secteur.
+                </p>
             </div>
 
         </div>
     </section>
 
-    <!-- FOOTER BIEN SÉPARÉ -->
-    <footer class="w-full border-t border-gray-900 bg-dark-elegant/80 py-8 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 space-y-4 sm:space-y-0">
-            <p>&copy; 2026 DP Rénov'. Tous droits réservés.</p>
-            <div class="flex space-x-6">
-                <span>📍 Gourin - Carhaix-Plouguer</span>
-                <span class="text-gold/80">🛡️ Assurance Décennale Professionnelle</span>
-            </div>
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="max-w-4xl mx-auto px-4 py-16">
+        <div class="bg-card-elegant p-8 sm:p-12 rounded-2xl border border-gray-800 shadow-2xl">
+            <h2 class="font-serif text-3xl text-white mb-2 text-center">Contactez-nous</h2>
+            <p class="text-gray-400 text-center text-sm mb-8 font-light">Une demande de devis ou une question ? Laissez-nous un message.</p>
+            
+            <form action="mailto:dp.renov29@gmail.com" method="POST" enctype="text/plain" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase font-medium text-gray-400 mb-2">Nom & Prénom</label>
+                        <input type="text" name="nom" required class="w-full bg-dark-elegant border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-medium text-gray-400 mb-2">Téléphone</label>
+                        <input type="tel" name="telephone" required class="w-full bg-dark-elegant border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-medium text-gray-400 mb-2">Votre message</label>
+                    <textarea name="message" rows="4" required class="w-full bg-dark-elegant border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold text-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full btn-gold text-white font-semibold py-4 rounded-lg transition uppercase text-xs tracking-wider">
+                    Envoyer ma demande
+                </button>
+            </form>
         </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-900 py-8 bg-dark-elegant text-center text-xs text-gray-500">
+        <p>© DP Rénov' - Garantie Décennale - Centre-Bretagne</p>
     </footer>
 
+    <!-- SCRIPT CARTE LEAFLET (Géographie exacte) -->
+    <script>
+        // Initialisation centrée sur la zone
+        const map = L.map('map').setView([48.22, -3.48], 9);
+
+        // Fond de carte sombre personnalisé (CartoDB Dark Matter)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Coordonnées GPS exactes des 5 villes
+        const villes = [
+            { name: "Carhaix-Plouguer", coords: [48.2758, -3.5739], main: true },
+            { name: "Rostrenen", coords: [48.2361, -3.3164] },
+            { name: "Gourin", coords: [48.1394, -3.6067] },
+            { name: "Callac", coords: [48.4042, -3.4267] },
+            { name: "Le Faouët", coords: [48.0328, -3.4883] }
+        ];
+
+        // Dessin des marqueurs dorés
+        villes.forEach(v => {
+            const marker = L.circleMarker(v.coords, {
+                color: '#C5A880',
+                fillColor: v.main ? '#C5A880' : '#1A2026',
+                fillOpacity: 0.9,
+                radius: v.main ? 9 : 6
+            }).addTo(map);
+            
+            marker.bindTooltip(v.name, { 
+                permanent: true, 
+                direction: 'top', 
+                className: 'leaflet-tooltip' 
+            });
+        });
+    </script>
 </body>
 </html>
