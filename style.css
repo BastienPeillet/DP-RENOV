@@ -216,6 +216,83 @@ input:focus-visible {
   line-height: 1.6;
 }
 
+.logo-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-links a.active {
+  color: #cbb26a;
+}
+
+.page-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 7.5rem 5% 1rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 0.6rem;
+}
+
+.page-header p {
+  color: #9ca3af;
+}
+
+/* Réalisations */
+.realisations-section {
+  padding: 4rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.realisations-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.realisations-intro {
+  color: #9ca3af;
+  margin-bottom: 2.5rem;
+}
+
+.realisations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.realisation-card {
+  background-color: #131722;
+  border: 1px solid rgba(203, 178, 106, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.realisation-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbb26a;
+}
+
+.realisation-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.realisation-card figcaption {
+  padding: 0.9rem 1.1rem;
+  color: #cbb26a;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
 /* Secteur */
 .secteur-section {
   padding: 4rem 5%;
