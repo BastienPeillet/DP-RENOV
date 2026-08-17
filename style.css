@@ -241,6 +241,12 @@ input:focus-visible {
   color: #9ca3af;
 }
 
+.logo-img {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
 /* Réalisations */
 .realisations-section {
   padding: 4rem 5%;
